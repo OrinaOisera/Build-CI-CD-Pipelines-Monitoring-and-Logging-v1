@@ -17,8 +17,10 @@ pipeline {
          }      
          stage('Upload to AWS') {
               steps {
-                  withAWS(region:'us-east-1',credentials:'AKIAZCL4YITKZDCPS3SJ') {
-                  sh 'echo "Uploading content with AWS creds"'
+                   pwd();
+                   
+                  withAWS(region:'us-east-1',credentials:'jenk2') {
+                   def identity=awsIdentity();
                       s3Upload( file:'index.html', bucket:'s3jenkins23', path:'index.html')
                   }
               }
